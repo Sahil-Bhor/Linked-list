@@ -1,40 +1,63 @@
 #include <iostream>
 using namespace std;
-class Node {
-   public:
-   int data;
-   Node *next_node;
+
+class Node
+{
+public:
+    int data;
+    Node *next;
 };
-Node* head_node = NULL;
 
-void insert(int new_data) {
-   Node* new_node = (Node*) malloc(sizeof(Node));
+void print_list(Node *ptr)
+{
+    Node *temp = ptr;
 
-   new_node->data = new_data; 
-   new_node->next_node = head_node;
-   head_node = new_node;
+    while (temp != NULL)
+    {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
 }
-void display() {
-   Node* ptr;
-   ptr = head_node;
-   while (ptr != NULL) {
-      cout<< ptr->data <<" ";
-      ptr = ptr->next_node;
-   }
+
+void create_node(Node *&ptr, int num)
+{
+    Node *new_node = new Node();
+    new_node->data = num;
+    new_node->next = NULL;
+
+    if (ptr == NULL)
+    {
+        ptr = new_node;
+        return;
+    }
+
+    Node *temp = ptr;
+
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
+    }
+
+    temp->next = new_node;
 }
-int main() {
-   int n,num,i;
-   cout<<"\nHow many numbers do u want to insert: ";
-   cin>>n;
-   for(i=0;i<n;i++)
-   {
-       cout<<(i+1)<<".Enter the number: ";
-       cin>>num;
-       insert(num);
-   }
-   
-   cout<<"\nThe linked list is: ";
-   display();
-   cout<<"\n";
-   return 0;
+
+int main()
+{
+    int num, element;
+    Node *head = NULL;
+
+    cout << "How many no you want to insert : ";
+    cin >> num;
+
+    cout << "Enter the numbers : ";
+    for (int i = 0; i < num; i++)
+    {
+        cin >> element;
+        create_node(head, element);
+    }
+
+    print_list(head);
+
+    cout << endl;
+    return 0;
 }
