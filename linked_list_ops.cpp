@@ -45,6 +45,36 @@ void insertAtTail(Node *&tail, int val)
     tail = new_node;
 }
 
+
+void deleteNode(Node *&head, Node *&tail, int position)
+{
+    int count = 1;
+    Node *current = head;
+    Node *prev = NULL;
+
+    if (position == 1)
+    {
+        Node *temp = head;
+        head = head->next;
+        temp->next = NULL;
+        delete (temp);
+    }
+
+    while (count < position)
+    {
+        prev = current;
+        current = current->next;
+        count++;
+    }
+    if (current->next == NULL)
+    {
+        tail = prev;
+    }
+    prev->next = current->next;
+    current->next = NULL;
+    delete (current);
+}
+
 int main()
 {
 
@@ -63,8 +93,11 @@ int main()
     insertAtTail(tail, 89);
     print_list(head);
 
+    deleteNode(head, tail, 4);
+    print_list(head);
+
     printf("\nThe head is %d", head->data);
-    printf("\nThe tail is %d", tail->data);
+    printf("\nThe tail is %d\n", tail->data);
 
     cout << endl;
     return 0;
