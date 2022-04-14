@@ -31,7 +31,6 @@ void print_list(Node *&head)
 void insertAtHead(Node *&head, int val)
 {
     Node *new_node = new Node(val);
-    // new_node->data = val;
     new_node->next = head;
     head = new_node;
 }
@@ -83,7 +82,7 @@ int main()
     insertAtHead(head, 34);
     print_list(head);
 
-    Node *tail = head; // condition it should be placed/initialised before a head
+    Node *tail = head; // condition: it should be placed/initialised before a head
 
     insertAtHead(head, 59);
     print_list(head);
